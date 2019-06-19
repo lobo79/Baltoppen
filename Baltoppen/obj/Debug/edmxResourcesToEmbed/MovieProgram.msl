@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BaltoppenModelStoreContainer" CdmEntityContainer="BaltoppenEntities">
+    <EntitySetMapping Name="Movies">
+      <EntityTypeMapping TypeName="BaltoppenModel.Movies">
+        <MappingFragment StoreEntitySet="Movies">
+          <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+          <ScalarProperty Name="MovieTitle" ColumnName="MovieTitle" />
+          <ScalarProperty Name="Director" ColumnName="Director" />
+          <ScalarProperty Name="Cast" ColumnName="Cast" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reservations">
+      <EntityTypeMapping TypeName="BaltoppenModel.Reservations">
+        <MappingFragment StoreEntitySet="Reservations">
+          <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+          <ScalarProperty Name="Paid" ColumnName="Paid" />
+          <ScalarProperty Name="PhoneNr" ColumnName="PhoneNr" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="FkScreeningId" ColumnName="FkScreeningId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReservedSeats">
+      <EntityTypeMapping TypeName="BaltoppenModel.ReservedSeats">
+        <MappingFragment StoreEntitySet="ReservedSeats">
+          <ScalarProperty Name="ReservedSeatId" ColumnName="ReservedSeatId" />
+          <ScalarProperty Name="FkSeatId" ColumnName="FkSeatId" />
+          <ScalarProperty Name="FkScreeningId" ColumnName="FkScreeningId" />
+          <ScalarProperty Name="FkReservationId" ColumnName="FkReservationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Screenings">
+      <EntityTypeMapping TypeName="BaltoppenModel.Screenings">
+        <MappingFragment StoreEntitySet="Screenings">
+          <ScalarProperty Name="ScreeningId" ColumnName="ScreeningId" />
+          <ScalarProperty Name="ScreeningStart" ColumnName="ScreeningStart" />
+          <ScalarProperty Name="FkMovieId" ColumnName="FkMovieId" />
+          <ScalarProperty Name="FkTheaterId" ColumnName="FkTheaterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seats">
+      <EntityTypeMapping TypeName="BaltoppenModel.Seats">
+        <MappingFragment StoreEntitySet="Seats">
+          <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+          <ScalarProperty Name="SeatRow" ColumnName="SeatRow" />
+          <ScalarProperty Name="SeatNumber" ColumnName="SeatNumber" />
+          <ScalarProperty Name="FkTheaterId" ColumnName="FkTheaterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SoldProducts">
+      <EntityTypeMapping TypeName="BaltoppenModel.SoldProducts">
+        <MappingFragment StoreEntitySet="SoldProducts">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+          <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
+          <ScalarProperty Name="CustomText" ColumnName="CustomText" />
+          <ScalarProperty Name="Delivered" ColumnName="Delivered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Theaters">
+      <EntityTypeMapping TypeName="BaltoppenModel.Theaters">
+        <MappingFragment StoreEntitySet="Theaters">
+          <ScalarProperty Name="TheaterId" ColumnName="TheaterId" />
+          <ScalarProperty Name="TheaterName" ColumnName="TheaterName" />
+          <ScalarProperty Name="SeatAmount" ColumnName="SeatAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="BaltoppenModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

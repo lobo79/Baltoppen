@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BaltoppenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Movies">
+    <Key>
+      <PropertyRef Name="MovieId" />
+      <PropertyRef Name="MovieTitle" />
+    </Key>
+    <Property Name="MovieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MovieTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Director" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Cast" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Duration" Type="Int32" />
+    <Property Name="Thumbnail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Reservations">
+    <Key>
+      <PropertyRef Name="ReservationId" />
+      <PropertyRef Name="Paid" />
+      <PropertyRef Name="PhoneNr" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="FkScreeningId" />
+    </Key>
+    <Property Name="ReservationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Paid" Type="Boolean" Nullable="false" />
+    <Property Name="PhoneNr" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FkScreeningId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReservedSeats">
+    <Key>
+      <PropertyRef Name="ReservedSeatId" />
+      <PropertyRef Name="FkSeatId" />
+      <PropertyRef Name="FkScreeningId" />
+      <PropertyRef Name="FkReservationId" />
+    </Key>
+    <Property Name="ReservedSeatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FkSeatId" Type="Int32" Nullable="false" />
+    <Property Name="FkScreeningId" Type="Int32" Nullable="false" />
+    <Property Name="FkReservationId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Screenings">
+    <Key>
+      <PropertyRef Name="ScreeningId" />
+      <PropertyRef Name="ScreeningStart" />
+      <PropertyRef Name="FkMovieId" />
+      <PropertyRef Name="FkTheaterId" />
+    </Key>
+    <Property Name="ScreeningId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ScreeningStart" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="FkMovieId" Type="Int32" Nullable="false" />
+    <Property Name="FkTheaterId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Seats">
+    <Key>
+      <PropertyRef Name="SeatId" />
+      <PropertyRef Name="SeatRow" />
+      <PropertyRef Name="SeatNumber" />
+      <PropertyRef Name="FkTheaterId" />
+    </Key>
+    <Property Name="SeatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SeatRow" Type="Int32" Nullable="false" />
+    <Property Name="SeatNumber" Type="Int32" Nullable="false" />
+    <Property Name="FkTheaterId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SoldProducts">
+    <Key>
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="ProductType" />
+      <PropertyRef Name="CustomerName" />
+      <PropertyRef Name="CustomerAddress" />
+      <PropertyRef Name="CustomerPhone" />
+      <PropertyRef Name="Delivered" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustomerAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustomerPhone" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustomText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Delivered" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Theaters">
+    <Key>
+      <PropertyRef Name="TheaterId" />
+      <PropertyRef Name="TheaterName" />
+      <PropertyRef Name="SeatAmount" />
+    </Key>
+    <Property Name="TheaterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TheaterName" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SeatAmount" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="Username" />
+      <PropertyRef Name="Password" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Role" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="BaltoppenEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Movies" EntityType="Self.Movies" />
+    <EntitySet Name="Reservations" EntityType="Self.Reservations" />
+    <EntitySet Name="ReservedSeats" EntityType="Self.ReservedSeats" />
+    <EntitySet Name="Screenings" EntityType="Self.Screenings" />
+    <EntitySet Name="Seats" EntityType="Self.Seats" />
+    <EntitySet Name="SoldProducts" EntityType="Self.SoldProducts" />
+    <EntitySet Name="Theaters" EntityType="Self.Theaters" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+  </EntityContainer>
+</Schema>

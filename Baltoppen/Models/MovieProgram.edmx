@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BaltoppenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Baltoppen.dbo.Movies' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="MovieId" />
+            <PropertyRef Name="MovieTitle" />
+          </Key>
+          <Property Name="MovieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Director" Type="varchar" MaxLength="50" />
+          <Property Name="Cast" Type="text" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="Thumbnail" Type="varchar" MaxLength="60" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Baltoppen.dbo.Reservations' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Reservations">
+          <Key>
+            <PropertyRef Name="ReservationId" />
+            <PropertyRef Name="Paid" />
+            <PropertyRef Name="PhoneNr" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="FkScreeningId" />
+          </Key>
+          <Property Name="ReservationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Paid" Type="bit" Nullable="false" />
+          <Property Name="PhoneNr" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FkScreeningId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Baltoppen.dbo.ReservedSeats' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ReservedSeats">
+          <Key>
+            <PropertyRef Name="ReservedSeatId" />
+            <PropertyRef Name="FkSeatId" />
+            <PropertyRef Name="FkScreeningId" />
+            <PropertyRef Name="FkReservationId" />
+          </Key>
+          <Property Name="ReservedSeatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FkSeatId" Type="int" Nullable="false" />
+          <Property Name="FkScreeningId" Type="int" Nullable="false" />
+          <Property Name="FkReservationId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Baltoppen.dbo.Screenings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Screenings">
+          <Key>
+            <PropertyRef Name="ScreeningId" />
+            <PropertyRef Name="ScreeningStart" />
+            <PropertyRef Name="FkMovieId" />
+            <PropertyRef Name="FkTheaterId" />
+          </Key>
+          <Property Name="ScreeningId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScreeningStart" Type="time" Precision="7" Nullable="false" />
+          <Property Name="FkMovieId" Type="int" Nullable="false" />
+          <Property Name="FkTheaterId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Baltoppen.dbo.Seats' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Seats">
+          <Key>
+            <PropertyRef Name="SeatId" />
+            <PropertyRef Name="SeatRow" />
+            <PropertyRef Name="SeatNumber" />
+            <PropertyRef Name="FkTheaterId" />
+          </Key>
+          <Property Name="SeatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeatRow" Type="int" Nullable="false" />
+          <Property Name="SeatNumber" Type="int" Nullable="false" />
+          <Property Name="FkTheaterId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Baltoppen.dbo.SoldProducts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SoldProducts">
+          <Key>
+            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="ProductType" />
+            <PropertyRef Name="CustomerName" />
+            <PropertyRef Name="CustomerAddress" />
+            <PropertyRef Name="CustomerPhone" />
+            <PropertyRef Name="Delivered" />
+          </Key>
+          <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductType" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="CustomerAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerPhone" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="CustomText" Type="text" />
+          <Property Name="Delivered" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Baltoppen.dbo.Theaters' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Theaters">
+          <Key>
+            <PropertyRef Name="TheaterId" />
+            <PropertyRef Name="TheaterName" />
+            <PropertyRef Name="SeatAmount" />
+          </Key>
+          <Property Name="TheaterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TheaterName" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="SeatAmount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Baltoppen.dbo.Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Role" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="BaltoppenModelStoreContainer">
+          <EntitySet Name="Movies" EntityType="Self.Movies" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Movies].[MovieId] AS [MovieId], 
+    [Movies].[MovieTitle] AS [MovieTitle], 
+    [Movies].[Director] AS [Director], 
+    [Movies].[Cast] AS [Cast], 
+    [Movies].[Duration] AS [Duration], 
+    [Movies].[Thumbnail] AS [Thumbnail]
+    FROM [dbo].[Movies] AS [Movies]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Reservations" EntityType="Self.Reservations" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Reservations].[ReservationId] AS [ReservationId], 
+    [Reservations].[Paid] AS [Paid], 
+    [Reservations].[PhoneNr] AS [PhoneNr], 
+    [Reservations].[Email] AS [Email], 
+    [Reservations].[FkScreeningId] AS [FkScreeningId]
+    FROM [dbo].[Reservations] AS [Reservations]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ReservedSeats" EntityType="Self.ReservedSeats" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ReservedSeats].[ReservedSeatId] AS [ReservedSeatId], 
+    [ReservedSeats].[FkSeatId] AS [FkSeatId], 
+    [ReservedSeats].[FkScreeningId] AS [FkScreeningId], 
+    [ReservedSeats].[FkReservationId] AS [FkReservationId]
+    FROM [dbo].[ReservedSeats] AS [ReservedSeats]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Screenings" EntityType="Self.Screenings" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Screenings].[ScreeningId] AS [ScreeningId], 
+    [Screenings].[ScreeningStart] AS [ScreeningStart], 
+    [Screenings].[FkMovieId] AS [FkMovieId], 
+    [Screenings].[FkTheaterId] AS [FkTheaterId]
+    FROM [dbo].[Screenings] AS [Screenings]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Seats" EntityType="Self.Seats" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Seats].[SeatId] AS [SeatId], 
+    [Seats].[SeatRow] AS [SeatRow], 
+    [Seats].[SeatNumber] AS [SeatNumber], 
+    [Seats].[FkTheaterId] AS [FkTheaterId]
+    FROM [dbo].[Seats] AS [Seats]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SoldProducts" EntityType="Self.SoldProducts" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SoldProducts].[ProductId] AS [ProductId], 
+    [SoldProducts].[ProductType] AS [ProductType], 
+    [SoldProducts].[CustomerName] AS [CustomerName], 
+    [SoldProducts].[CustomerAddress] AS [CustomerAddress], 
+    [SoldProducts].[CustomerPhone] AS [CustomerPhone], 
+    [SoldProducts].[CustomText] AS [CustomText], 
+    [SoldProducts].[Delivered] AS [Delivered]
+    FROM [dbo].[SoldProducts] AS [SoldProducts]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Theaters" EntityType="Self.Theaters" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Theaters].[TheaterId] AS [TheaterId], 
+    [Theaters].[TheaterName] AS [TheaterName], 
+    [Theaters].[SeatAmount] AS [SeatAmount]
+    FROM [dbo].[Theaters] AS [Theaters]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Users" EntityType="Self.Users" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Users].[UserId] AS [UserId], 
+    [Users].[Username] AS [Username], 
+    [Users].[Password] AS [Password], 
+    [Users].[Email] AS [Email], 
+    [Users].[Role] AS [Role]
+    FROM [dbo].[Users] AS [Users]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BaltoppenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="MovieId" />
+            <PropertyRef Name="MovieTitle" />
+          </Key>
+          <Property Name="MovieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Director" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cast" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="Thumbnail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Reservations">
+          <Key>
+            <PropertyRef Name="ReservationId" />
+            <PropertyRef Name="Paid" />
+            <PropertyRef Name="PhoneNr" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="FkScreeningId" />
+          </Key>
+          <Property Name="ReservationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Paid" Type="Boolean" Nullable="false" />
+          <Property Name="PhoneNr" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FkScreeningId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReservedSeats">
+          <Key>
+            <PropertyRef Name="ReservedSeatId" />
+            <PropertyRef Name="FkSeatId" />
+            <PropertyRef Name="FkScreeningId" />
+            <PropertyRef Name="FkReservationId" />
+          </Key>
+          <Property Name="ReservedSeatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FkSeatId" Type="Int32" Nullable="false" />
+          <Property Name="FkScreeningId" Type="Int32" Nullable="false" />
+          <Property Name="FkReservationId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Screenings">
+          <Key>
+            <PropertyRef Name="ScreeningId" />
+            <PropertyRef Name="ScreeningStart" />
+            <PropertyRef Name="FkMovieId" />
+            <PropertyRef Name="FkTheaterId" />
+          </Key>
+          <Property Name="ScreeningId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScreeningStart" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="FkMovieId" Type="Int32" Nullable="false" />
+          <Property Name="FkTheaterId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Seats">
+          <Key>
+            <PropertyRef Name="SeatId" />
+            <PropertyRef Name="SeatRow" />
+            <PropertyRef Name="SeatNumber" />
+            <PropertyRef Name="FkTheaterId" />
+          </Key>
+          <Property Name="SeatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeatRow" Type="Int32" Nullable="false" />
+          <Property Name="SeatNumber" Type="Int32" Nullable="false" />
+          <Property Name="FkTheaterId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SoldProducts">
+          <Key>
+            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="ProductType" />
+            <PropertyRef Name="CustomerName" />
+            <PropertyRef Name="CustomerAddress" />
+            <PropertyRef Name="CustomerPhone" />
+            <PropertyRef Name="Delivered" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerPhone" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Delivered" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Theaters">
+          <Key>
+            <PropertyRef Name="TheaterId" />
+            <PropertyRef Name="TheaterName" />
+            <PropertyRef Name="SeatAmount" />
+          </Key>
+          <Property Name="TheaterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TheaterName" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SeatAmount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Role" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="BaltoppenEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Movies" EntityType="Self.Movies" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservations" />
+          <EntitySet Name="ReservedSeats" EntityType="Self.ReservedSeats" />
+          <EntitySet Name="Screenings" EntityType="Self.Screenings" />
+          <EntitySet Name="Seats" EntityType="Self.Seats" />
+          <EntitySet Name="SoldProducts" EntityType="Self.SoldProducts" />
+          <EntitySet Name="Theaters" EntityType="Self.Theaters" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BaltoppenModelStoreContainer" CdmEntityContainer="BaltoppenEntities1">
+          <EntitySetMapping Name="Movies">
+            <EntityTypeMapping TypeName="BaltoppenModel.Movies">
+              <MappingFragment StoreEntitySet="Movies">
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="MovieTitle" ColumnName="MovieTitle" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="Cast" ColumnName="Cast" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="BaltoppenModel.Reservations">
+              <MappingFragment StoreEntitySet="Reservations">
+                <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
+                <ScalarProperty Name="PhoneNr" ColumnName="PhoneNr" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FkScreeningId" ColumnName="FkScreeningId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReservedSeats">
+            <EntityTypeMapping TypeName="BaltoppenModel.ReservedSeats">
+              <MappingFragment StoreEntitySet="ReservedSeats">
+                <ScalarProperty Name="ReservedSeatId" ColumnName="ReservedSeatId" />
+                <ScalarProperty Name="FkSeatId" ColumnName="FkSeatId" />
+                <ScalarProperty Name="FkScreeningId" ColumnName="FkScreeningId" />
+                <ScalarProperty Name="FkReservationId" ColumnName="FkReservationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Screenings">
+            <EntityTypeMapping TypeName="BaltoppenModel.Screenings">
+              <MappingFragment StoreEntitySet="Screenings">
+                <ScalarProperty Name="ScreeningId" ColumnName="ScreeningId" />
+                <ScalarProperty Name="ScreeningStart" ColumnName="ScreeningStart" />
+                <ScalarProperty Name="FkMovieId" ColumnName="FkMovieId" />
+                <ScalarProperty Name="FkTheaterId" ColumnName="FkTheaterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seats">
+            <EntityTypeMapping TypeName="BaltoppenModel.Seats">
+              <MappingFragment StoreEntitySet="Seats">
+                <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+                <ScalarProperty Name="SeatRow" ColumnName="SeatRow" />
+                <ScalarProperty Name="SeatNumber" ColumnName="SeatNumber" />
+                <ScalarProperty Name="FkTheaterId" ColumnName="FkTheaterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SoldProducts">
+            <EntityTypeMapping TypeName="BaltoppenModel.SoldProducts">
+              <MappingFragment StoreEntitySet="SoldProducts">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+                <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
+                <ScalarProperty Name="CustomText" ColumnName="CustomText" />
+                <ScalarProperty Name="Delivered" ColumnName="Delivered" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Theaters">
+            <EntityTypeMapping TypeName="BaltoppenModel.Theaters">
+              <MappingFragment StoreEntitySet="Theaters">
+                <ScalarProperty Name="TheaterId" ColumnName="TheaterId" />
+                <ScalarProperty Name="TheaterName" ColumnName="TheaterName" />
+                <ScalarProperty Name="SeatAmount" ColumnName="SeatAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BaltoppenModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
