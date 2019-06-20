@@ -134,6 +134,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Controllers\ScreeningsController.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Models\Theaters.cs">
       <DependentUpon>MovieProgram.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Users.cs">
       <DependentUpon>MovieProgram.tt</DependentUpon>
     </Compile>
@@ -248,6 +250,7 @@
     <Content Include="Views\Screenings\Details.cshtml" />
     <Content Include="Views\Screenings\Edit.cshtml" />
     <Content Include="Views\Screenings\Index.cshtml" />
+    <Content Include="Views\admin\admin_login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
